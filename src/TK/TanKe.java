@@ -9,6 +9,8 @@ import java.awt.event.WindowEvent;
 
 public class TanKe extends Frame {
 	int x = 200, y = 200;
+	Dir dir = Dir.LEFT;
+	final int speed = 10;
 
 	public TanKe() {
 
@@ -31,6 +33,23 @@ public class TanKe extends Frame {
 	@Override
 	public void paint(Graphics g) {
 		g.fillRect(x, y, 50, 50);
+		switch (dir) {
+		case LEFT:
+			x -= speed;
+			break;
+		case RIGHT:
+			x += speed;
+			break;
+		case UP:
+			y -= speed;
+			break;
+		case DOWN:
+			y += speed;
+			break;
+		default:
+			break;
+		}
+
 		// x += 10;
 //		y += 10;
 
@@ -44,6 +63,35 @@ public class TanKe extends Frame {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
+			int key = e.getKeyCode();
+			switch (key) {
+			case KeyEvent.VK_LEFT:
+				// x -= 10;
+				bL = true;
+				break;
+			case KeyEvent.VK_RIGHT:
+				// x += 10;
+				bR = true;
+				break;
+			case KeyEvent.VK_DOWN:
+				// y += 10;
+				bD = true;
+				break;
+			case KeyEvent.VK_UP:
+				// y -= 10;
+				bU = true;
+				break;
+			default:
+				break;
+			}
+
+			// x += 200;
+			// repaint();
+			setMainTankDir();
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
 			int key = e.getKeyCode();
 			switch (key) {
 			case KeyEvent.VK_LEFT:
@@ -65,13 +113,23 @@ public class TanKe extends Frame {
 			default:
 				break;
 			}
+			setMainTankDir();
 
-			// x += 200;
-			// repaint();
 		}
 
-		@Override
-		public void keyReleased(KeyEvent e) {
+		private void setMainTankDir() {
+			if (bL) {
+				dir = Dir.LEFT;
+			}
+			if (bD) {
+				dir = Dir.DOWN;
+			}
+			if (bU) {
+				dir = Dir.UP;
+			}
+			if (bR) {
+				dir = Dir.RIGHT;
+			}
 
 		}
 	}
