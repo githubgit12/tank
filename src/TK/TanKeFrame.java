@@ -1,7 +1,9 @@
 package TK;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -11,10 +13,11 @@ public class TanKeFrame extends Frame {
 
 	Tanke myTanke = new Tanke(200, 200, Dir.DOWN);
 	Bullet b = new Bullet(300, 300, Dir.DOWN);
+	static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
 	public TanKeFrame() {
 
-		this.setSize(800, 600);
+		this.setSize(GAME_WIDTH, GAME_HEIGHT);
 		this.setResizable(false);
 		this.setTitle("TanKe");
 		this.setVisible(true);
@@ -25,6 +28,25 @@ public class TanKeFrame extends Frame {
 				System.exit(0);// 退出程序
 			}
 		});
+	}
+
+	/**
+	 * 双缓冲 消除闪烁
+	 */
+	Image offScreenImage = null;
+
+	@Override
+	public void update(Graphics g) {
+		if (offScreenImage == null) {
+			offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+		}
+		Graphics goffScreen = offScreenImage.getGraphics();
+		Color c = goffScreen.getColor();
+		goffScreen.setColor(Color.BLACK);
+		goffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		goffScreen.setColor(c);
+		paint(goffScreen);
+		g.drawImage(offScreenImage, 0, 0, null);
 	}
 
 	/*
