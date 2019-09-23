@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 
 public class TanKeFrame extends Frame {
 
-	Tanke myTanke = new Tanke(200, 200, Dir.DOWN);
+	Tanke myTanke = new Tanke(200, 200, Dir.DOWN, this);
 	Bullet b = new Bullet(300, 300, Dir.DOWN);
 	static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
@@ -114,6 +114,8 @@ public class TanKeFrame extends Frame {
 				// y -= 10;
 				bU = false;
 				break;
+			case KeyEvent.VK_CONTROL:
+				myTanke.fire();
 			default:
 				break;
 			}
