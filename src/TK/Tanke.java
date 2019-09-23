@@ -7,6 +7,16 @@ public class Tanke {
 	private Dir dir = Dir.DOWN;
 	private static final int speed = 10;
 
+	private boolean moving = false;
+
+	public boolean isMoving() {
+		return moving;
+	}
+
+	public void setMoving(boolean moving) {
+		this.moving = moving;
+	}
+
 	public Dir getDir() {
 		return dir;
 	}
@@ -24,6 +34,14 @@ public class Tanke {
 
 	public void paint(Graphics g) {
 		g.fillRect(x, y, 50, 50);
+		move();
+
+	}
+
+	private void move() {
+		if (!moving) {
+			return;
+		}
 		switch (dir) {
 		case LEFT:
 			x -= speed;
