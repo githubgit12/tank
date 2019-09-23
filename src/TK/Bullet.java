@@ -1,12 +1,12 @@
 package TK;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
-public class Tanke {
-	private int x, y;
-	private Dir dir = Dir.DOWN;
-	private static final int speed = 5;
+public class Bullet {
 
+	private static final int SPEED = 1;
+	private static int WIDTH = 30, HEIGHT = 30;
 	private boolean moving = false;
 
 	public boolean isMoving() {
@@ -17,48 +17,45 @@ public class Tanke {
 		this.moving = moving;
 	}
 
-	public Dir getDir() {
-		return dir;
-	}
+	private int x, y;
 
-	public void setDir(Dir dir) {
-		this.dir = dir;
-	}
+	private Dir dir;
 
-	public Tanke(int x, int y, Dir dir) {
-		super();
+	public Bullet(int x, int y, Dir dir) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 	}
 
 	public void paint(Graphics g) {
-		g.fillRect(x, y, 50, 50);
+		Color color = g.getColor();
+		g.setColor(Color.RED);
+		g.fillOval(x, y, WIDTH, HEIGHT);
+		g.setColor(color);
 		move();
 
 	}
 
 	private void move() {
-		if (!moving) {
-			return;
-		}
+//		if (!moving) {
+//			return;
+//		}
 		switch (dir) {
 		case LEFT:
-			x -= speed;
+			x -= SPEED;
 			break;
 		case RIGHT:
-			x += speed;
+			x += SPEED;
 			break;
 		case UP:
-			y -= speed;
+			y -= SPEED;
 			break;
 		case DOWN:
-			y += speed;
+			y += SPEED;
 			break;
 		default:
 			break;
 		}
 
 	}
-
 }

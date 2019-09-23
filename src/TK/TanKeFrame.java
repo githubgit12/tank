@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 public class TanKeFrame extends Frame {
 
 	Tanke myTanke = new Tanke(200, 200, Dir.DOWN);
+	Bullet b = new Bullet(300, 300, Dir.DOWN);
 
 	public TanKeFrame() {
 
@@ -32,6 +33,7 @@ public class TanKeFrame extends Frame {
 	@Override
 	public void paint(Graphics g) {
 		myTanke.paint(g);
+		b.paint(g);
 
 	}
 
