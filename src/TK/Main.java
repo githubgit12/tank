@@ -3,7 +3,7 @@ package TK;
 public class Main {
 	public static void main(String[] args) {
 
-		TanKe tanKe = new TanKe();
+		TanKeFrame tanKe = new TanKeFrame();
 
 		while (true) {
 			try {
