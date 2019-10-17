@@ -1,7 +1,6 @@
 package TK;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
 public class Bullet {
 
@@ -10,7 +9,7 @@ public class Bullet {
 	public static int HEIGHT = ResoureMgr.bulletD.getHeight();
 	private boolean moving = false;
 
-	private boolean live = true;
+	private boolean living = true;
 
 	public boolean isMoving() {
 		return moving;
@@ -33,7 +32,7 @@ public class Bullet {
 	}
 
 	public void paint(Graphics g) {
-		if (!live) {
+		if (!living) {
 			tf.bullets.remove(this);
 		}
 		switch (dir){
@@ -77,8 +76,21 @@ public class Bullet {
 		}
 		if (x < 0 || y < 0 || x > TanKeFrame.GAME_WIDTH || y > TanKeFrame.GAME_HEIGHT) {
 
-			live = false;
+			living = false;
 		}
 
 	}
+
+    public void collideWith(Tanke tanke) {
+        Rectangle rect1 = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
+        Rectangle rect2 = new Rectangle(tanke.getX(),tanke.getY(),Tanke.WIDTH,Tanke.HEIGHT);
+        if(rect1.intersects(rect2)){
+            tanke.die();
+            this.die();
+        }
+    }
+
+    private void die() {
+	    this.living = false;
+    }
 }

@@ -5,6 +5,23 @@ import java.awt.Graphics;
 
 public class Tanke {
 	private int x, y;
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
 	private Dir dir = Dir.DOWN;
 	private static final int speed = 5;
 
@@ -13,7 +30,8 @@ public class Tanke {
 
 	private boolean moving = false;
 
-	private TanKeFrame tf;
+	private TanKeFrame tf = null;
+	private boolean living = true;
 
 	public boolean isMoving() {
 		return moving;
@@ -40,6 +58,7 @@ public class Tanke {
 	}
 
 	public void paint(Graphics g) {
+		if(!living) tf.tankes.remove(this);
 		switch (dir){
 			case LEFT:
 				g.drawImage(ResoureMgr.tankL,x,y,null);
@@ -89,4 +108,7 @@ public class Tanke {
 
 	}
 
+	public void die() {
+		this.living = false;
+	}
 }
