@@ -37,10 +37,21 @@ public class Tanke {
 	}
 
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, 50, 50);
-		g.setColor(c);
+		switch (dir){
+			case LEFT:
+				g.drawImage(ResoureMgr.tankL,x,y,null);
+				break;
+			case UP:
+				g.drawImage(ResoureMgr.tankU,x,y,null);
+				break;
+			case RIGHT:
+				g.drawImage(ResoureMgr.tankR,x,y,null);
+				break;
+			case DOWN:
+				g.drawImage(ResoureMgr.tankD,x,y,null);
+				break;
+		}
+
 		move();
 
 	}

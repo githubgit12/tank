@@ -11,14 +11,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class ImageTest {
     @Test
      void test(){
-
         try {
             BufferedImage image = ImageIO.read(new File("E:\\ideaWork\\tank\\src\\images\\bulletD.gif"));
             assertNotNull(image);
+
+            BufferedImage image1 = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
+            assertNotNull(image1);
         } catch (IOException e) {
             e.printStackTrace();
         }
         // fail("1111");
-
      }
 }
