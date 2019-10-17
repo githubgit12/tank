@@ -8,6 +8,9 @@ public class Tanke {
 	private Dir dir = Dir.DOWN;
 	private static final int speed = 5;
 
+	public static int WIDTH = ResoureMgr.tankD.getWidth();
+	public static int HEIGHT = ResoureMgr.tankD.getHeight();
+
 	private boolean moving = false;
 
 	private TanKeFrame tf;
@@ -80,7 +83,9 @@ public class Tanke {
 	}
 
 	public void fire() {
-		tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
+		int bX = this.x + Tanke.WIDTH/2 - Bullet.WIDTH/2;
+		int bY = this.y + Tanke.HEIGHT/2 - Bullet.HEIGHT/2;
+		tf.bullets.add(new Bullet(bX, bY, this.dir, this.tf));
 
 	}
 
