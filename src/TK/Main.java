@@ -6,7 +6,7 @@ public class Main {
 		TanKeFrame tanKe = new TanKeFrame();
 		//初始化敌方坦克
 		for (int i = 0; i <5 ; i++) {
-			tanKe.tankes.add(new Tanke(50+i*80,200,Dir.DOWN,tanKe));
+			tanKe.tankes.add(new Tanke(50+i*80,200,Dir.DOWN,Group.BAD,tanKe));
 		}
 
 		while (true) {

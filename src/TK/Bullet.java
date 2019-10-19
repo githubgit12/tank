@@ -23,12 +23,22 @@ public class Bullet {
 
 	private Dir dir;
 	private TanKeFrame tf;
+	private Group group = Group.BAD;
 
-	public Bullet(int x, int y, Dir dir, TanKeFrame tf) {
+	public Bullet(int x, int y, Dir dir, Group group,TanKeFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
+		this.group = group;
 		this.tf = tf;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
 	public void paint(Graphics g) {
@@ -82,6 +92,8 @@ public class Bullet {
 	}
 
     public void collideWith(Tanke tanke) {
+		if(this.group == tanke.getGroup()) return;
+
         Rectangle rect1 = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
         Rectangle rect2 = new Rectangle(tanke.getX(),tanke.getY(),Tanke.WIDTH,Tanke.HEIGHT);
         if(rect1.intersects(rect2)){

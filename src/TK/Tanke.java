@@ -2,6 +2,7 @@ package TK;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 public class Tanke {
 	private int x, y;
@@ -21,18 +22,18 @@ public class Tanke {
 	public void setY(int y) {
 		this.y = y;
 	}
-
+	private Random random = new Random();
 	private Dir dir = Dir.DOWN;
-	private static final int speed = 5;
+	private static final int speed = 2;
 
 	public static int WIDTH = ResoureMgr.tankD.getWidth();
 	public static int HEIGHT = ResoureMgr.tankD.getHeight();
 
-	private boolean moving = false;
+	private boolean moving = true;
 
 	private TanKeFrame tf = null;
 	private boolean living = true;
-
+    private Group group = Group.BAD;
 	public boolean isMoving() {
 		return moving;
 	}
@@ -49,11 +50,20 @@ public class Tanke {
 		this.dir = dir;
 	}
 
-	public Tanke(int x, int y, Dir dir, TanKeFrame tf) {
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
+	public Tanke(int x, int y, Dir dir, Group group, TanKeFrame tf) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
+		this.group = group;
 		this.tf = tf;
 	}
 
@@ -98,13 +108,14 @@ public class Tanke {
 		default:
 			break;
 		}
-
+        //randomDir();
+		if(random.nextInt(10) > 8) this.fire();
 	}
 
 	public void fire() {
 		int bX = this.x + Tanke.WIDTH/2 - Bullet.WIDTH/2;
 		int bY = this.y + Tanke.HEIGHT/2 - Bullet.HEIGHT/2;
-		tf.bullets.add(new Bullet(bX, bY, this.dir, this.tf));
+		tf.bullets.add(new Bullet(bX, bY, this.dir,this.group, this.tf));
 
 	}
 
